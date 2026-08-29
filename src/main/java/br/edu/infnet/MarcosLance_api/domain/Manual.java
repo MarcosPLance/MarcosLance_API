@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
@@ -22,8 +24,10 @@ public class Manual implements Identificavel{
 	private boolean perdivel;
 	private String dificuldade;
 	
+	
+	@ManyToOne
+	@JoinColumn(name = "Trofeu_id")
 	@JsonBackReference
-	@Transient
 	private Trofeu trofeu;
 	
 	protected Manual() {

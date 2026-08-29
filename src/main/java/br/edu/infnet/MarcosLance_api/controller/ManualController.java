@@ -66,6 +66,14 @@ public class ManualController {
 		//return ResponseEntity.status(HttpStatus.CREATED).body(manual);
 		return ResponseEntity.created(location).body(manual);
 	}
+
+	@GetMapping("/perdiveis")
+	public ResponseEntity<List<Manual>> obterPerdiveis(){
+		List<Manual> manuais  = manualService.obterPublicados();
+		
+		return ResponseEntity.ok(manuais);
+	}
+	
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<Manual> alterar(@PathVariable Long id, @RequestBody Manual manual){

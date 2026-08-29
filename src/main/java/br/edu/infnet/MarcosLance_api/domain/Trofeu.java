@@ -5,13 +5,28 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-public class Trofeu implements Identificavel {
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
+
+@Entity
+@Table(name = "trofeus")
+public class Trofeu implements Identificavel {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long ID;
 	private String nome;
 	private String tipo;
 	
 	private Game game;
 	
+	@OneToMany(mappedBy = "trofeu")
 	@JsonManagedReference
 	private List<Manual> manuais = new ArrayList<Manual>();
 	
@@ -33,6 +48,7 @@ public class Trofeu implements Identificavel {
 		if(manual == null) {
 			throw new IllegalArgumentException("Precisa existir um Manual!!!");
 		}
+		
 		manuais.add(manual);
 		manual.setTrofeu(this);
 	}
@@ -56,11 +72,14 @@ public class Trofeu implements Identificavel {
 	public Game getGame() {
 		return game;
 	}
-
+	
 	public void setGame(Game game) {
 		this.game = game;
 	}
-
+	
+	public void setID(Long iD) {
+		ID = iD;
+	}
 
 	public String getNome() {
 		return nome;

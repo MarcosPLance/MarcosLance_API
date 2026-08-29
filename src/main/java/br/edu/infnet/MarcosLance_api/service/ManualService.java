@@ -31,6 +31,14 @@ public class ManualService extends BaseService<Manual> {
 		return obterLista().stream().filter(Manual::isPublicado).toList();
 	}
 
+	public List<Manual> obterPublicadosDeclarativos(){
+		return obterLista()
+				.stream()
+				.filter(Manual::isPerdivel)
+				.toList();
+	}
+
+		
 	public List<Manual> buscaPorTitulo(String termo){
 		
 		List<Manual> resultado = new ArrayList<Manual>();
