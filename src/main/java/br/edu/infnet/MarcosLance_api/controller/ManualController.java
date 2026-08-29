@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import br.edu.infnet.MarcosLance_api.domain.Manual;
 import br.edu.infnet.MarcosLance_api.exception.RecursoNaoEncontradoException;
 import br.edu.infnet.MarcosLance_api.service.ManualService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/manuais")
@@ -57,7 +59,7 @@ public class ManualController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Manual> incluir(@RequestBody Manual manual) {
+	public ResponseEntity<Manual> incluir(@Valid @RequestBody Manual manual) {
 
 		manualService.incluir(manual);
 		
@@ -76,7 +78,8 @@ public class ManualController {
 	
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Manual> alterar(@PathVariable Long id, @RequestBody Manual manual){
+	public ResponseEntity<Manual> alterar(@PathVariable Long id,@Valid @RequestBody Manual manual){
+		
 		
 		manual.setID(id);
 		

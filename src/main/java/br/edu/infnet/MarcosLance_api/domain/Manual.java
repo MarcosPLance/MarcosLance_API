@@ -19,7 +19,9 @@ public class Manual implements Identificavel{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long ID;
+	@Column(nullable = false)
 	private String titulo;
+	@Column(nullable = false)
 	private String descricao;
 	private boolean perdivel;
 	private String dificuldade;

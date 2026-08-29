@@ -4,11 +4,27 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
+
+@Entity
+@Table(name = "games")
 public class Game implements Identificavel {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long ID;
 	private String nome;
 	private String lancamento;
 	private String distribuidora;
 	
+	
+	@OneToMany(mappedBy = "game")
 	private final List<Trofeu> trofeus = new ArrayList<Trofeu>();
 	
 	
@@ -42,6 +58,10 @@ public class Game implements Identificavel {
 				//trofeus.size()
 				);
 		
+	}
+	
+	public void setID(Long iD) {
+		ID = iD;
 	}
 
 	public String getNome() {
