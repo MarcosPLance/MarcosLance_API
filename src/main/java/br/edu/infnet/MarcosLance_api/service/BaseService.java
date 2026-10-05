@@ -6,8 +6,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import br.edu.infnet.MarcosLance_api.arq.game.Game;
+import br.edu.infnet.MarcosLance_api.arq.manual.Manual;
 import br.edu.infnet.MarcosLance_api.domain.Identificavel;
-import br.edu.infnet.MarcosLance_api.domain.Manual;
 import br.edu.infnet.MarcosLance_api.exception.IdentificadorDuplicadoException;
 import br.edu.infnet.MarcosLance_api.exception.RecursoNaoEncontradoException;
 
@@ -36,6 +37,7 @@ public abstract class BaseService<T extends Identificavel> {
 		
 		
 		dados.put(objeto.getID(), objeto);
+		
 		
 		
 	}

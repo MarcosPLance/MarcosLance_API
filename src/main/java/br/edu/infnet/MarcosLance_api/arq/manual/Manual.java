@@ -1,8 +1,15 @@
-package br.edu.infnet.MarcosLance_api.domain;
+package br.edu.infnet.MarcosLance_api.arq.manual;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+
+import br.edu.infnet.MarcosLance_api.domain.Identificavel;
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,11 +34,24 @@ public class Manual implements Identificavel{
 	private String dificuldade;
 	
 	
-	@ManyToOne
-	@JoinColumn(name = "Trofeu_id")
-	@JsonBackReference
-	private Trofeu trofeu;
+	@ElementCollection
+	@CollectionTable(
+			name = "game_trofeu",
+			joinColumns = @JoinColumn(name = "game_id") 
+			)
+	@Column(name = "trofeu_id")
+	private Set<Long> trofeusIds = new HashSet<Long>();
 	
+	
+	
+	
+	
+//	
+//	@ManyToOne
+//	@JoinColumn(name = "Trofeu_id")
+//	@JsonBackReference
+//	private Trofeu trofeu;
+//	
 	protected Manual() {
 		// TODO Auto-generated constructor stub
 	}
@@ -77,25 +97,21 @@ public class Manual implements Identificavel{
 		this.dificuldade = dificuldade;
 	}
 
-	public Trofeu getTrofeu() {
-		return trofeu;
+	public Set<Long> getTrofeusIds() {
+		return trofeusIds;
 	}
 
-	public void setTrofeu(Trofeu trofeu) {
-		this.trofeu = trofeu;
-	}
-	
+
+
 	@Override
 	public String toString() {
 		
-		String nomeTrofeu = trofeu != null ? trofeu.getNome() : "Sem trofeu";
 		
 		return String.format("Manual {Titulo='%s', Descricao='%s', Perdivel='%s', Dificuldade='%s', Trofeu='%d'}",
 				titulo,
 				descricao,
 				perdivel ? "sim": "não",
-				dificuldade,
-				nomeTrofeu
+				dificuldade
 				);
 		
 	}

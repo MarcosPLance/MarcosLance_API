@@ -1,8 +1,23 @@
-package br.edu.infnet.MarcosLance_api.domain;
+package br.edu.infnet.MarcosLance_api.arq.jogador;
 
+import br.edu.infnet.MarcosLance_api.domain.Usuario;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+
+
+@Entity
 public class Jogador extends Usuario {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long Id;
+	@NotBlank
 	private String nick;
 	private String console;
+	
 	
 	public Jogador() {
 		// TODO Auto-generated constructor stub
@@ -39,6 +54,15 @@ public class Jogador extends Usuario {
 	public void setConsole(String console) {
 		this.console = console;
 	}
+	
+	public Long getId() {
+		return Id;
+	}
+
+	public void setId(Long id) {
+		Id = id;
+	}
+
 	
 	
 }

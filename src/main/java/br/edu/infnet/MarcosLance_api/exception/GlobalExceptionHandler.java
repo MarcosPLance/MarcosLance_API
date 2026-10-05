@@ -9,6 +9,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import br.edu.infnet.MarcosLance_api.arq.trofeu.exception.TrofeuRemotoNaoEncontradoException;
+import br.edu.infnet.MarcosLance_api.arq.trofeu.exception.TrofeuServiceIndisponivelException;
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 	
@@ -53,6 +56,14 @@ public class GlobalExceptionHandler {
 		return criarResposta(HttpStatus.BAD_REQUEST, exception.getMessage());
 	}
 	
-	
+	@ExceptionHandler(TrofeuRemotoNaoEncontradoException.class)
+	public ResponseEntity<ErroResponse> tratarTrofeuRemotoNaoEncontrado(TrofeuRemotoNaoEncontradoException exception){
+		return criarResposta(HttpStatus.NOT_FOUND, exception.getMessage());
+	}
+
+	@ExceptionHandler(TrofeuServiceIndisponivelException.class)
+	public ResponseEntity<ErroResponse> tratarTrofeuServiceIndisponivel(TrofeuServiceIndisponivelException exception){
+		return criarResposta(HttpStatus.SERVICE_UNAVAILABLE, exception.getMessage());
+	}
 	
 }

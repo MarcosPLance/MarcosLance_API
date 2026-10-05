@@ -1,11 +1,23 @@
 package br.edu.infnet.MarcosLance_api.domain;
 
-public abstract class Usuario implements Identificavel {
+import java.time.LocalDateTime;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
+
+public abstract class Usuario implements Identificavel {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long ID;
 	private String nome;
 	private String sobrenome;
+	@Email
 	private String email;
-	private Long ID;
+	private LocalDateTime dataNascimento;
+	
 	
 	
 	public Usuario() {
@@ -69,6 +81,13 @@ public abstract class Usuario implements Identificavel {
 	public void setID(Long iD) {
 		this.ID = iD;
 	}
-	
+	public LocalDateTime getDataNascimento() {
+		return dataNascimento;
+	}
+
+
+	public void setDataNascimento(LocalDateTime dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
 	
 }

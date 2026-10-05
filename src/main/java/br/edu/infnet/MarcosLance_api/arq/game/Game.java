@@ -1,20 +1,22 @@
-package br.edu.infnet.MarcosLance_api.domain;
+package br.edu.infnet.MarcosLance_api.arq.game;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+//import br.edu.infnet.MarcosLance_api.arq.trofeu.Trofeu;
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.JoinColumn;
 
 
 @Entity
-@Table(name = "games")
-public class Game implements Identificavel {
+public class Game  {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,14 +25,20 @@ public class Game implements Identificavel {
 	private String lancamento;
 	private String distribuidora;
 	
+	@ElementCollection
+	@CollectionTable(
+			name = "game_trofeu",
+			joinColumns = @JoinColumn(name = "game_id") 
+			)
+	//@Column(name = "trofeu_id")
+//	private Set<Long> trofeusIds = new HashSet<Long>();
+	private Set<Long> trofeusIds = new HashSet<>();
 	
-	@OneToMany(mappedBy = "game")
-	private final List<Trofeu> trofeus = new ArrayList<Trofeu>();
 	
 	
 	public Game() {
-		
 	}
+	
 	
 	public Game(String nome, String string, String distribuidora) {
 		super();
@@ -39,15 +47,17 @@ public class Game implements Identificavel {
 		this.distribuidora = distribuidora;
 	}
 	
-	public void adicionarTrofeu(Trofeu trofeu){
-		
-		if(trofeu == null) {
-			throw new IllegalArgumentException("Precisa existir Trofeus!!!");
-		}
-		
-		trofeus.add(trofeu);
-		trofeu.setGame(this);
+	public Set<Long> getTrofeusIds() {
+		return trofeusIds;
 	}
+	
+	
+	
+	public void adicionarTrofeu(Long trofeuId){	
+		trofeusIds.add(trofeuId);
+	}
+	
+	
 	
 	@Override
 	public String toString() {
@@ -55,18 +65,18 @@ public class Game implements Identificavel {
 				nome,
 				distribuidora,
 				lancamento
-				//trofeus.size()
-				);
-		
+				);	
 	}
 	
-	public void setID(Long iD) {
-		ID = iD;
-	}
-
+	
+	public Long getID() {
+		return ID;
+	}	
+	
 	public String getNome() {
 		return nome;
 	}
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
@@ -78,21 +88,8 @@ public class Game implements Identificavel {
 	}
 	public String getDistribuidora() {
 		return distribuidora;
-	}
+	}	
 	public void setDistribuidora(String distribuidora) {
-		distribuidora = distribuidora;
+		this.distribuidora = distribuidora;
 	}
-
-	public List<Trofeu> getTrofeus() {		
-		return Collections.unmodifiableList(trofeus);
-	}
-
-	@Override
-	public Long getID() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
-	
 }

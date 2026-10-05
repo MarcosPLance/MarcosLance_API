@@ -1,4 +1,4 @@
-package br.edu.infnet.MarcosLance_api.controller;
+package br.edu.infnet.MarcosLance_api.arq.manual;
 
 import java.net.URI;
 import java.util.List;
@@ -16,9 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.edu.infnet.MarcosLance_api.domain.Manual;
 import br.edu.infnet.MarcosLance_api.exception.RecursoNaoEncontradoException;
-import br.edu.infnet.MarcosLance_api.service.ManualService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 
 @RestController
@@ -69,6 +68,7 @@ public class ManualController {
 		return ResponseEntity.created(location).body(manual);
 	}
 
+	@Operation
 	@GetMapping("/perdiveis")
 	public ResponseEntity<List<Manual>> obterPerdiveis(){
 		List<Manual> manuais  = manualService.obterPublicados();

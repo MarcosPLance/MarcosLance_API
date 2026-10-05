@@ -1,4 +1,4 @@
-package br.edu.infnet.MarcosLance_api.service;
+package br.edu.infnet.MarcosLance_api.arq.manual;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,9 +6,9 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import br.edu.infnet.MarcosLance_api.domain.Manual;
+import br.edu.infnet.MarcosLance_api.arq.game.Game;
 import br.edu.infnet.MarcosLance_api.exception.RecursoNaoEncontradoException;
-import br.edu.infnet.MarcosLance_api.repository.ManualRepository;
+import br.edu.infnet.MarcosLance_api.service.BaseService;
 
 @Service
 public class ManualService extends BaseService<Manual> {

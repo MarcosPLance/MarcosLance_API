@@ -1,4 +1,6 @@
-package br.edu.infnet.MarcosLance_api.domain;
+package br.edu.infnet.MarcosLance_api.arq.administrador;
+
+import br.edu.infnet.MarcosLance_api.domain.Usuario;
 
 public class Administrador extends Usuario {
 	private boolean aprovaManual;
