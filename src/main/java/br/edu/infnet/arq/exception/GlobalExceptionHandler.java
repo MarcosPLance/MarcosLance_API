@@ -1,4 +1,4 @@
-package br.edu.infnet.MarcosLance_api.exception;
+package br.edu.infnet.arq.exception;
 
 import java.time.LocalDateTime;
 import java.util.stream.Collectors;
@@ -8,6 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import br.edu.infnet.arq.trofeu.IdentificadorDuplicadoException;
+import br.edu.infnet.arq.trofeu.TrofeuNaoEncontradoException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -37,8 +40,8 @@ public class GlobalExceptionHandler {
 		return criarResposta(HttpStatus.BAD_REQUEST, mensagem);
 	}
 
-	@ExceptionHandler(RecursoNaoEncontradoException.class)
-	public ResponseEntity<ErroResponse> tratarRecursoNaoEncontrado(RecursoNaoEncontradoException exception){
+	@ExceptionHandler(TrofeuNaoEncontradoException.class)
+	public ResponseEntity<ErroResponse> tratarRecursoNaoEncontrado(TrofeuNaoEncontradoException exception){
 		
 		return criarResposta(HttpStatus.NOT_FOUND, exception.getMessage());
 	}

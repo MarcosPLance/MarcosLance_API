@@ -1,9 +1,8 @@
-package br.edu.infnet.MarcosLance_api;
+package br.edu.infnet.arq;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import br.edu.infnet.MarcosLance_api.domain.Game;
 
 @SpringBootApplication
 public class MarcosLanceApiApplication {

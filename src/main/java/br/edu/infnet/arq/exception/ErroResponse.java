@@ -1,4 +1,4 @@
-package br.edu.infnet.MarcosLance_api.exception;
+package br.edu.infnet.arq.exception;
 
 import java.time.LocalDateTime;
 
